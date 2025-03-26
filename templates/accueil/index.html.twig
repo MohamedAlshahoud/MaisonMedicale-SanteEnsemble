@@ -3,54 +3,39 @@
 {% block title %}Accueil - Centre Médical{% endblock %}
 
 {% block body %}
-    <header class="hero">
-        <div class="container text-center">
-            <h1>Bienvenue au Centre Médical</h1>
-            <p>Prenez rendez-vous avec nos spécialistes en ligne en quelques clics.</p>
-            <a href="" class="btn btn-primary">Prendre un rendez-vous</a>
+    <!-- Section Héro -->
+    <header class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Bienvenue au Centre Médical</h1>
+            <p class="lead">Prenez rendez-vous avec nos spécialistes en ligne en quelques clics.</p>
+            <a href="" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
         </div>
     </header>
 
+    <!-- Section Spécialités -->
     <section class="container mt-5">
-        <h2>Nos Spécialités</h2>
+        <h2 class="text-center mb-4">Nos Spécialités</h2>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>Cardiologie</h3>
-                        <p>Suivi des maladies cardiovasculaires</p>
+            
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>Dermatologie</h3>
-                        <p>Soins de la peau et traitements</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>ORL</h3>
-                        <p>Problèmes auditifs et respiratoires</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <div class="text-center mt-3">
-            <a href="" class="btn btn-secondary">Voir toutes les spécialités</a>
+            <a href="" class="btn btn-outline-primary">Voir toutes les spécialités</a>
         </div>
     </section>
 
+    <!-- Section Contact -->
     <section class="container mt-5">
-        <h2>Contact & Accès</h2>
-        <p><strong>Adresse :</strong> 123 Rue des Médecins, Paris</p>
-        <p><strong>Téléphone :</strong> +33 1 23 45 67 89</p>
-        <p><strong>Email :</strong> contact@centre-medical.com</p>
-        <div id="map">
-            <!-- Ici, on peut intégrer une carte Google Maps -->
-        </div>
+        <h2 class="text-center">Contact & Accès</h2>
+        <p class="text-center"><strong>Adresse :</strong>Rue des Médecins 7, 4000 Liège</p>
+        <p class="text-center"><strong>Téléphone :</strong> +32 489 47 08 53</p>
+        <p class="text-center"><strong>Email :</strong> contact@centre-medical.com</p>
     </section>
 {% endblock %}
