@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir une spécialité{% endblock %}
+
+{% block body %}
+    <h1>Choisissez une spécialité</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.specialite) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

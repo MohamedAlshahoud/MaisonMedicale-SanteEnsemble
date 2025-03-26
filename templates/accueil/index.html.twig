@@ -1,42 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Centre Médical{% endblock %}
+{% block title %}Accueil - Réservation Médicale{% endblock %}
 
 {% block body %}
     <!-- Section Héro -->
     <header class="bg-primary text-white text-center py-5">
         <div class="container">
-            <h1 class="display-4">Bienvenue au Centre Médical</h1>
-            <p class="lead">Prenez rendez-vous avec nos spécialistes en ligne en quelques clics.</p>
-            <a href="{{ path('rendez_vous') }}" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
+            <h1 class="display-4">Bienvenue sur notre plateforme de réservation médicale</h1>
+            <p class="lead">Prenez rendez-vous avec nos médecins généralistes en ligne en quelques clics.</p>
+            <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
         </div>
     </header>
 
-    <!-- Section Spécialités -->
+    <!-- Section des médecins disponibles -->
     <section class="container mt-5">
-        <h2 class="text-center mb-4">Nos Spécialités</h2>
+        <h2 class="text-center">Nos médecins généralistes disponibles</h2>
         <div class="row">
-            {% for specialite in specialites %}
+            {% for medecin in medecins %}
                 <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{ specialite.nom }}</h5>
-                            <p class="card-text">{{ specialite.description }}</p>
+                    <div class="card">
+                        <img src="{{ asset('images/medecin-placeholder.jpg') }}" class="card-img-top" alt="{{ medecin.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ medecin.nom }} {{ medecin.prenom }}</h5>
+                            <p class="card-text">Médecin généraliste</p>
+                            <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-primary">Prendre un rendez-vous</a>
                         </div>
                     </div>
                 </div>
+            {% else %}
+                <p class="text-center">Aucun médecin disponible pour l'instant.</p>
             {% endfor %}
         </div>
-        <div class="text-center mt-3">
-            <a href="{{ path('toutes_specialites') }}" class="btn btn-outline-primary">Voir toutes les spécialités</a>
-        </div>
-    </section>
-
-    <!-- Section Contact -->
-    <section class="container mt-5">
-        <h2 class="text-center">Contact & Accès</h2>
-        <p class="text-center"><strong>Adresse :</strong> Rue des Médecins 7, 4000 Liège</p>
-        <p class="text-center"><strong>Téléphone :</strong> +32 489 47 08 53</p>
-        <p class="text-center"><strong>Email :</strong> contact@centre-medical.com</p>
     </section>
 {% endblock %}

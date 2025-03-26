@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir un Médecin{% endblock %}
+
+{% block body %}
+    <h2>Choisissez un Médecin Généraliste</h2>
+    {{ form_start(form) }}
+        {{ form_row(form.medecin) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rendez-vous confirmé{% endblock %}
+
+{% block body %}
+    <h1>Votre rendez-vous a été confirmé</h1>
+    <p>Médecin : {{ rendezVous.medecin.nom }} {{ rendezVous.medecin.prenom }}</p>
+    <p>Date et heure : {{ rendezVous.dateHeure|date('d/m/Y H:i') }}</p>
+{% endblock %}

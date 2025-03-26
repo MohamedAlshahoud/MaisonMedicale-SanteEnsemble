@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir une Disponibilité{% endblock %}
+
+{% block body %}
+    <h2>Choisissez une Disponibilité</h2>
+    {{ form_start(form) }}
+        {{ form_row(form.disponibilite) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -2,15 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Specialite;
+use App\Entity\Medecin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 final class AccueilController extends AbstractController
 {
-
     private $entityManager;
 
     // Injection de l'EntityManagerInterface
@@ -19,29 +18,30 @@ final class AccueilController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-
     #[Route('/', name: 'app_accueil')]
     public function index(): Response
     {
-        // Récupérer toutes les spécialités depuis la base de données
-        $specialites = $this->entityManager->getRepository(Specialite::class)->findAll();
+        // Récupérer tous les médecins généralistes depuis la base de données
+        // Ajouter un filtre si nécessaire, par exemple en vérifiant si les médecins sont généralistes
+        $medecins = $this->entityManager->getRepository(Medecin::class)->findBy(['isGeneraliste' => true]);
 
-        // Renvoyer la vue avec les spécialités
+        // Renvoyer la vue avec les médecins
         return $this->render('accueil/index.html.twig', [
-            'specialites' => $specialites,
+            'medecins' => $medecins,
         ]);
     }
 
-    // Nouvelle route pour afficher toutes les spécialités
-    #[Route('/specialites', name: 'toutes_specialites')]
-    public function toutesSpecialites(): Response
+    // Nouvelle route pour afficher tous les médecins généralistes
+    #[Route('/medecins', name: 'tous_medecins')]
+    public function tousMedecins(): Response
     {
-        // Récupérer toutes les spécialités depuis la base de données
-        $specialites = $this->entityManager->getRepository(Specialite::class)->findAll();
+        // Récupérer tous les médecins généralistes depuis la base de données
+        // Si tu veux un affichage spécifique des médecins généralistes
+        $medecins = $this->entityManager->getRepository(Medecin::class)->findBy(['isGeneraliste' => true]);
 
-        // Renvoyer la vue avec toutes les spécialités
-        return $this->render('accueil/toutes_specialites.html.twig', [
-            'specialites' => $specialites,
+        // Renvoyer la vue avec tous les médecins
+        return $this->render('accueil/tous_medecins.html.twig', [
+            'medecins' => $medecins,
         ]);
     }
 }
