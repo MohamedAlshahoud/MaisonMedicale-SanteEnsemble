@@ -1,20 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Accueil - Centre Médical{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <header class="hero">
+        <div class="container text-center">
+            <h1>Bienvenue au Centre Médical</h1>
+            <p>Prenez rendez-vous avec nos spécialistes en ligne en quelques clics.</p>
+            <a href="" class="btn btn-primary">Prendre un rendez-vous</a>
+        </div>
+    </header>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <section class="container mt-5">
+        <h2>Nos Spécialités</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>Cardiologie</h3>
+                        <p>Suivi des maladies cardiovasculaires</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>Dermatologie</h3>
+                        <p>Soins de la peau et traitements</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>ORL</h3>
+                        <p>Problèmes auditifs et respiratoires</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <a href="" class="btn btn-secondary">Voir toutes les spécialités</a>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/symfony/centre-medical/src/Controller/AccueilController.php</code></li>
-        <li>Your template at <code>C:/symfony/centre-medical/templates/accueil/index.html.twig</code></li>
-    </ul>
-</div>
+    <section class="container mt-5">
+        <h2>Contact & Accès</h2>
+        <p><strong>Adresse :</strong> 123 Rue des Médecins, Paris</p>
+        <p><strong>Téléphone :</strong> +33 1 23 45 67 89</p>
+        <p><strong>Email :</strong> contact@centre-medical.com</p>
+        <div id="map">
+            <!-- Ici, on peut intégrer une carte Google Maps -->
+        </div>
+    </section>
 {% endblock %}
