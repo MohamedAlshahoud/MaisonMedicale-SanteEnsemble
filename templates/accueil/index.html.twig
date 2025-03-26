@@ -8,7 +8,7 @@
         <div class="container">
             <h1 class="display-4">Bienvenue au Centre Médical</h1>
             <p class="lead">Prenez rendez-vous avec nos spécialistes en ligne en quelques clics.</p>
-            <a href="" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
+            <a href="{{ path('rendez_vous') }}" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
         </div>
     </header>
 
@@ -16,25 +16,26 @@
     <section class="container mt-5">
         <h2 class="text-center mb-4">Nos Spécialités</h2>
         <div class="row">
-            
+            {% for specialite in specialites %}
                 <div class="col-md-4">
                     <div class="card shadow-sm">
                         <div class="card-body text-center">
-                            
+                            <h5 class="card-title">{{ specialite.nom }}</h5>
+                            <p class="card-text">{{ specialite.description }}</p>
                         </div>
                     </div>
                 </div>
-            
+            {% endfor %}
         </div>
         <div class="text-center mt-3">
-            <a href="" class="btn btn-outline-primary">Voir toutes les spécialités</a>
+            <a href="{{ path('toutes_specialites') }}" class="btn btn-outline-primary">Voir toutes les spécialités</a>
         </div>
     </section>
 
     <!-- Section Contact -->
     <section class="container mt-5">
         <h2 class="text-center">Contact & Accès</h2>
-        <p class="text-center"><strong>Adresse :</strong>Rue des Médecins 7, 4000 Liège</p>
+        <p class="text-center"><strong>Adresse :</strong> Rue des Médecins 7, 4000 Liège</p>
         <p class="text-center"><strong>Téléphone :</strong> +32 489 47 08 53</p>
         <p class="text-center"><strong>Email :</strong> contact@centre-medical.com</p>
     </section>

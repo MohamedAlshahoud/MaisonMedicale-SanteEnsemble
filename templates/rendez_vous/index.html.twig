@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prendre un Rendez-vous{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">Prenez un Rendez-vous</h1>
+
+        <form action="{{ path('rendez_vous') }}" method="post">
+            <div class="mb-3">
+                <label for="specialite" class="form-label">Choisissez une spécialité :</label>
+                <select class="form-select" id="specialite" name="specialite" required>
+                    {% for specialite in specialites %}
+                        <option value="{{ specialite.id }}">{{ specialite.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="medecin" class="form-label">Choisissez un médecin :</label>
+                <select class="form-select" id="medecin" name="medecin" required>
+                    {% for medecin in medecins %}
+                        <option value="{{ medecin.id }}">{{ medecin.nom }} {{ medecin.prenom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Choisissez une date :</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="heure" class="form-label">Choisissez une heure :</label>
+                <input type="time" class="form-control" id="heure" name="heure" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Réserver</button>
+        </form>
+    </div>
+{% endblock %}

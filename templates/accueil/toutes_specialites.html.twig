@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les Spécialités - Centre Médical{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Toutes nos Spécialités</h1>
+    
+    <div class="container">
+        <div class="row">
+            {% for specialite in specialites %}
+                <div class="col-md-4">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ specialite.nom }}</h5>
+                            <p class="card-text">{{ specialite.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
