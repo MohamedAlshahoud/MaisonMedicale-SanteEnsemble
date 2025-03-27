@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Centre Médical{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Contactez-nous</h1>
+
+    <div class="row">
+        <!-- Formulaire de contact -->
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="name" placeholder="Votre nom" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Votre email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Votre message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
+        <!-- Informations de contact -->
+        <div class="col-md-6">
+            <h3>Nos coordonnées</h3>
+            <p><strong>Adresse :</strong> Rue des rivageois 7, 4000 Liège</p>
+            <p><strong>Téléphone :</strong> +32 489 47 08 53</p>
+            <p><strong>Email :</strong> contact@centre-medical.com</p>
+
+            <!-- Carte Google Maps -->
+            <div class="ratio ratio-16x9 mt-3">
+                <iframe src="https://www.google.com/maps/place/Rue+des+Rivageois+7,+4000+Li%C3%A8ge/@50.6234418,5.5726536,16z/data=!3m1!4b1!4m6!3m5!1s0x47c0f9fc23532477:0x89c83abd517a0464!8m2!3d50.6234384!4d5.5752339!16s%2Fg%2F11c5m9xtx_?entry=ttu&g_ep=EgoyMDI1MDMyNC4wIKXMDSoASAFQAw%3D%3D" 
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
