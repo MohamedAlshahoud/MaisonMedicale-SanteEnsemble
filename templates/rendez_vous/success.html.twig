@@ -3,24 +3,7 @@
 {% block title %}Rendez-vous confirmé{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg border-0 rounded-3">
-                <div class="card-body text-center">
-                    <i class="fas fa-check-circle text-success display-4 mb-3"></i>
-                    <h2 class="text-success">Votre rendez-vous a été confirmé !</h2>
-                    <p class="lead">Merci d'avoir pris rendez-vous avec nous.</p>
-                    <hr>
-                    <p><strong>Médecin :</strong> {{ rendezVous.medecin.nom }} {{ rendezVous.medecin.prenom }}</p>
-                    <p><strong>Date et heure :</strong> {{ rendezVous.dateHeure|date('d/m/Y H:i') }}</p>
-                    <div class="mt-4">
-                        <a href="{{ path('app_accueil') }}" class="btn btn-primary">Retour à l'accueil</a>
-                        <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-outline-success">Prendre un autre rendez-vous</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <h1>Votre rendez-vous a été confirmé</h1>
+    <p>Médecin : {{ rendezVous.medecin.nom }} {{ rendezVous.medecin.prenom }}</p>
+    <p>Date et heure : {{ rendezVous.dateHeure|date('d/m/Y H:i') }}</p>
 {% endblock %}
