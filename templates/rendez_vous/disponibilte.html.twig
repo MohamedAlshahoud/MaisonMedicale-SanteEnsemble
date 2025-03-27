@@ -3,9 +3,23 @@
 {% block title %}Choisir une Disponibilité{% endblock %}
 
 {% block body %}
-    <h2>Choisissez une Disponibilité</h2>
-    {{ form_start(form) }}
-        {{ form_row(form.disponibilite) }}
-        {{ form_row(form.submit) }}
-    {{ form_end(form) }}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Choisissez une Disponibilité</h2>
+                        {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_row(form.disponibilite, {'attr': {'class': 'form-select'}}) }}
+                            </div>
+                            <div class="text-center">
+                                {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary btn-lg'}}) }}
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
