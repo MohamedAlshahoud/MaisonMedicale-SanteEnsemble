@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Réservation Médicale{% endblock %}
+{% block title %}Accueil - Centre Médical{% endblock %}
 
 {% block body %}
     <!-- Section Héro -->
     <header class="bg-primary text-white text-center py-5">
         <div class="container">
-            <h1 class="display-4">Bienvenue sur notre plateforme de réservation médicale</h1>
-            <p class="lead">Prenez rendez-vous avec nos médecins généralistes en ligne en quelques clics.</p>
+            <h1 class="display-4">Bienvenue sur notre centre médical </h1>
+            <p class="lead">Prenez rendez-vous avec nos médecins en ligne en quelques clics.</p>
             <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
         </div>
     </header>
 
     <!-- Section des médecins disponibles -->
     <section class="container mt-5">
-        <h2 class="text-center">Nos médecins généralistes disponibles</h2>
+        <h2 class="text-center">Nos médecins disponibles</h2>
         <div class="row">
             {% for medecin in medecins %}
                 <div class="col-md-4">
