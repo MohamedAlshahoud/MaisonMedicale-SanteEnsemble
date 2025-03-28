@@ -78,10 +78,12 @@ section h2 {
     font-size: 1rem;
     border-radius: 5px;
     transition: background-color 0.3s;
+    color: rgba(59, 209, 202, 0.819);
+    border-color: rgba(41, 198, 190, 0.947);
 }
 
 .card .btn:hover {
-    background-color: rgba(59, 209, 202, 0.819);
+    background-color: rgba(41, 198, 190, 0.947);
     color: white;
 }
 
