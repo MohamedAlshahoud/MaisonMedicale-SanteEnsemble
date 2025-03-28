@@ -2,7 +2,7 @@
    Style de la Section Héro
 ========================== */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg'); /* Ajoute une image de fond */
+    background: linear-gradient(rgba(59, 209, 202, 0.819), rgba(150, 103, 103, 0.337)), url('/images/hero-bg.jpg'); /* Ajoute une image de fond */
     background-size: cover;
     background-position: center;
     color: white;
@@ -31,7 +31,21 @@
 }
 
 .hero-section .btn:hover {
-    background-color: #0056b3; /* Changer la couleur au survol */
+    background-color: #d0242441; /* Changer la couleur au survol */
+}
+
+
+/* ==========================
+   Style de l'élément h2 (Titre de la section des médecins)
+========================== */
+section h2 {
+    color: rgba(46, 217, 208, 0.819);
+    font-size: 1.7rem; /* Taille du texte */
+    font-weight: 600; /* Légèrement plus gras pour attirer l'attention */
+    margin-bottom: 30px; /* Espace sous le titre */
+    text-transform: uppercase; /* Mettre le texte en majuscules */
+    letter-spacing: 1px; /* Espacement des lettres pour un effet stylisé */
+    text-align: center; /* Centrer le texte */
 }
 
 
@@ -67,7 +81,7 @@
 }
 
 .card .btn:hover {
-    background-color: #007bff;
+    background-color: rgba(59, 209, 202, 0.819);
     color: white;
 }
 
