@@ -4,29 +4,32 @@
 
 {% block body %}
     <!-- Section Héro -->
-    <header class="bg-primary text-white text-center py-5">
+    <header class="hero-section">
         <div class="container">
-            <h1 class="display-4">Bienvenue sur notre centre médical </h1>
-            <p class="lead">Prenez rendez-vous avec nos médecins en ligne en quelques clics.</p>
-            <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-light btn-lg">Prendre un rendez-vous</a>
+            <h1 class="display-4 fw-bold">Bienvenue sur notre Centre Médical</h1>
+            <p class="lead">Prenez rendez-vous en ligne avec nos spécialistes en quelques clics.</p>
+            <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-light btn-lg mt-3">Prendre un rendez-vous</a>
         </div>
     </header>
 
     <!-- Section des médecins disponibles -->
     <section class="container mt-5">
-        <h2 class="text-center">Nos médecins disponibles</h2>
-        <div class="row">
+        <h2 class="text-center text-primary mb-4">Nos médecins disponibles</h2>
+        <div class="row justify-content-center">
             {% for medecin in medecins %}
-                <div class="col-md-4">
-                    <div class="card">
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
                         <div class="card-body">
                             <h5 class="card-title">{{ medecin.nom }} {{ medecin.prenom }}</h5>
-                            <p class="card-text">Médecin généraliste</p>
+                            <p class="card-text text-muted">Médecin généraliste</p>
+                            <a href="#" class="btn btn-outline-primary mt-2">Voir Profil</a>
                         </div>
                     </div>
                 </div>
             {% else %}
-                <p class="text-center">Aucun médecin disponible pour l'instant.</p>
+                <div class="col-12">
+                    <p class="text-center text-danger">Aucun médecin disponible pour l'instant.</p>
+                </div>
             {% endfor %}
         </div>
     </section>

@@ -2,11 +2,38 @@
    Style de la Section Héro
 ========================== */
 .hero-section {
-    background: linear-gradient(to right, #007bff, #00c6ff);
-    padding: 100px 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg'); /* Ajoute une image de fond */
+    background-size: cover;
+    background-position: center;
     color: white;
     text-align: center;
+    padding: 100px 0;
 }
+
+.hero-section .container {
+    max-width: 800px;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+}
+
+.hero-section .btn {
+    font-size: 1.2rem;
+    padding: 10px 25px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.hero-section .btn:hover {
+    background-color: #0056b3; /* Changer la couleur au survol */
+}
+
 
 /* ==========================
    Style des Cartes Médecins
@@ -14,21 +41,33 @@
 .card {
     border: none;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card-title {
-    color: #007bff;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
-.btn-outline-primary {
-    border-radius: 20px;
-    padding: 8px 20px;
+.card-text {
+    font-size: 1rem;
 }
+
+.card .btn {
+    padding: 8px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.card .btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
