@@ -19,11 +19,9 @@
             {% for medecin in medecins %}
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="{{ asset('images/medecin-placeholder.jpg') }}" class="card-img-top" alt="{{ medecin.nom }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ medecin.nom }} {{ medecin.prenom }}</h5>
                             <p class="card-text">Médecin généraliste</p>
-                            <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-primary">Prendre un rendez-vous</a>
                         </div>
                     </div>
                 </div>
