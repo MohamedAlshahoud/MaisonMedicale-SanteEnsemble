@@ -12,6 +12,17 @@ final class ConnexionController extends AbstractController
     #[Route('/connexion', name: 'app_connexion')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        if ($user) {
+            if (in_array('ROLE_ADMIN', $user->getRoles())) {
+                return $this->redirectToRoute('admin_dashboard'); // 🔥 Redirige un admin vers le dashboard
+            } else {
+                return $this->redirectToRoute('patient_profile', ['id' => $user->getId()]); // 🔥 Redirige un patient vers son profil
+            }
+        }
+
         // Récupérer les erreurs de connexion si elles existent
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
