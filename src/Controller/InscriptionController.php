@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class InscriptionController extends AbstractController
 {
@@ -38,7 +39,7 @@ final class InscriptionController extends AbstractController
         
             $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
         
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_connexiongin');
         }
         
 
@@ -46,4 +47,6 @@ final class InscriptionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
 }
