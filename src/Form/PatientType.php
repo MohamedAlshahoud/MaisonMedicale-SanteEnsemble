@@ -27,7 +27,7 @@ class PatientType extends AbstractType
         ->add('email', EmailType::class, [
             'label' => 'Email'
         ])
-        ->add('password', PasswordType::class, [
+        ->add('motDePasse', PasswordType::class, [
             'label' => 'Mot de passe'
         ])
         ->add('dateNaissance', DateType::class, [
