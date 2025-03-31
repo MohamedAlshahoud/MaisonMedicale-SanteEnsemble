@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,8 +28,12 @@ class PatientType extends AbstractType
         ->add('email', EmailType::class, [
             'label' => 'Email'
         ])
-        ->add('motDePasse', PasswordType::class, [
-            'label' => 'Mot de passe'
+        ->add('plainMotDePasse', RepeatedType::class, [
+            'type' => PasswordType::class,
+            'mapped' => false, // Ce champ ne doit pas être directement mappé à l'entité
+            'required' => true,
+            'first_options'  => ['label' => 'Mot de passe'],
+            'second_options' => ['label' => 'Confirmez le mot de passe'],
         ])
         ->add('dateNaissance', DateType::class, [
             'widget' => 'single_text',

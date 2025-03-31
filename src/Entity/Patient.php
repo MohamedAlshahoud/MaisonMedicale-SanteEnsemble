@@ -1,13 +1,14 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: PatientRepository::class)]
-class Patient
+class Patient implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,7 +21,7 @@ class Patient
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -30,10 +31,13 @@ class Patient
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $adresee = null;
+    private ?string $adresse = null;
 
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     public function getId(): ?int
     {
@@ -48,7 +52,6 @@ class Patient
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -60,7 +63,6 @@ class Patient
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -72,7 +74,6 @@ class Patient
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -84,7 +85,6 @@ class Patient
     public function setMotDePasse(string $motDePasse): static
     {
         $this->motDePasse = $motDePasse;
-
         return $this;
     }
 
@@ -96,19 +96,17 @@ class Patient
     public function setDateNaissance(\DateTimeInterface $dateNaissance): static
     {
         $this->dateNaissance = $dateNaissance;
-
         return $this;
     }
 
-    public function getAdresee(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->adresee;
+        return $this->adresse;
     }
 
-    public function setAdresee(string $adresee): static
+    public function setAdresse(string $adresse): static
     {
-        $this->adresee = $adresee;
-
+        $this->adresse = $adresse;
         return $this;
     }
 
@@ -120,7 +118,35 @@ class Patient
     public function setTelephone(string $telephone): static
     {
         $this->telephone = $telephone;
+        return $this;
+    }
 
+    public function getPassword(): ?string
+    {
+        return $this->motDePasse;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials(): void
+    {
+        
+    }
+
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_PATIENT';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
         return $this;
     }
 }
