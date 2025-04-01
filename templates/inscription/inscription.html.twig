@@ -1,46 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription | Maison Médicale Santé Ensemble{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h2 class="text-center">Inscription</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                {{ form_start(form) }}
-                    <div class="mb-3">
-                        {{ form_label(form.nom) }}
+<!-- Formulaire d'inscription -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>Créer un compte</h4>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    
+                    <div class="form-group mb-3">
+                        {{ form_label(form.nom, 'Nom') }}
                         {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nom) }}
                     </div>
-                    <div class="mb-3">
-                        {{ form_label(form.prenom) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.prenom, 'Prénom') }}
                         {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.prenom) }}
                     </div>
-                    <div class="mb-3">
-                        {{ form_label(form.email) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.email, 'Email') }}
                         {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.email) }}
                     </div>
-                    <div class="mb-3">
-                        {{ form_label(form.plainMotDePasse) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.plainMotDePasse, 'Mot de passe') }}
                         {{ form_widget(form.plainMotDePasse, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.plainMotDePasse) }}
                     </div>
-                    <div class="mb-3">
-                        {{ form_label(form.dateNaissance) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.dateNaissance, 'Date de naissance') }}
                         {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.dateNaissance) }}
                     </div>
-                    <div class="mb-3">
-                        {{ form_label(form.adresse) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.adresse, 'Adresse') }}
                         {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.adresse) }}
                     </div>
-                    <div class="mb-3">
-                        {{ form_label(form.telephone) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.telephone, 'Numéro de téléphone') }}
                         {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.telephone) }}
                     </div>
-                    <div class="d-grid">
-                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                    <div class="form-group mb-3 text-center">
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary btn-lg btn-block'}}) }}
                     </div>
-                {{ form_end(form) }}
+
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
+</div>
+
 {% endblock %}

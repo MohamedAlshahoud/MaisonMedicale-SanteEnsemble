@@ -88,4 +88,32 @@ section h2 {
 }
 
 
+/* Style personnalisé pour l'inscription */
+.login_register_wrap {
+    padding: 60px 0;
+}
+
+.border_form {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.padding_eight_all {
+    padding: 40px;
+}
+
+.btn-fill-out {
+    background-color: #2cd3d0;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.btn-fill-out:hover {
+    background-color: #1fa9a7;
+}
+
+
 
