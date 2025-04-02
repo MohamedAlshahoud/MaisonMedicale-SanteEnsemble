@@ -69,5 +69,31 @@
 }
 
 /* ==========================
-   Autres sections spécifiques (ajouter au besoin)
+   Style pour le titre du formulaire
 ========================== */
+.form-title {
+    background: #2cd3d0; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 15px; /* Espacement intérieur */
+    border-radius: 8px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte */
+    margin-bottom: 20px; /* Espace en bas du titre */
+}
+
+/* ==========================
+   Style des boutons
+========================== */
+.btn-custom {
+    background-color: white; /* Couleur de fond du bouton */
+    color: #2cd3d0; /* Couleur du texte */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px 20px; /* Padding du bouton */
+    font-size: 16px; /* Taille du texte */
+    transition: background-color 0.3s ease; /* Transition pour l'effet hover */
+}
+
+.btn-custom:hover {
+    background-color: #1fa9a7; /* Couleur de fond au survol */
+    cursor: pointer; /* Curseur en forme de main */
+}
+
