@@ -26,11 +26,37 @@ header h1 {
 
 .navbar-brand {
     font-weight: bold;
+    font-size: 1rem; /* Taille de la police */
+    color: #333; /* Couleur du texte */
+}
+
+.navbar-brand span {
+    margin-right: 15px;
+}
+
+.navbar-brand i {
+    margin-right: 5px; /* Espace entre l'icône et le texte */
+    color: #2cd3d0; /* Couleur des icônes */
+}
+
+.navbar-brand a {
+    color: #2cd3d0; /* Couleur du lien (numéro de téléphone) */
+    text-decoration: none;
+}
+
+.navbar-brand a:hover {
+    text-decoration: underline;
 }
 
 .navbar-nav .nav-link {
     font-size: 1.1rem;
     font-weight: 500;
+}
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: 0.9rem; /* Ajuster la taille de police sur petits écrans */
+    }
 }
 
 /* ==========================
