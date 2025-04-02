@@ -1,0 +1,38 @@
+/* ==========================
+   Style Global - Header & Navbar
+========================== */
+header {
+    text-align: center;
+    background: red;
+    color: white;
+    padding: 20px 0;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ==========================
+   Footer
+========================== */
+footer {
+    background-color: #222;
+    color: white;
+    padding: 15px 0;
+}
+
+/* ==========================
+   Boutons et Effets
+========================== */
+.btn {
+    transition: all 0.3s ease-in-out;
+}

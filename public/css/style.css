@@ -1,17 +1,13 @@
 /* ==========================
-   Style de la Section Héro
+   Style de la Section Héro (Page d'accueil)
 ========================== */
 .hero-section {
-    background: linear-gradient(rgba(59, 209, 202, 0.819), rgba(150, 103, 103, 0.337)), url('/images/hero-bg.jpg'); /* Ajoute une image de fond */
+    background: linear-gradient(rgba(59, 209, 202, 0.819), rgba(150, 103, 103, 0.337)), url('/images/hero-bg.jpg'); 
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
     padding: 100px 0;
-}
-
-.hero-section .container {
-    max-width: 800px;
 }
 
 .hero-section h1 {
@@ -31,23 +27,8 @@
 }
 
 .hero-section .btn:hover {
-    background-color: #d0242441; /* Changer la couleur au survol */
+    background-color: #d0242441;
 }
-
-
-/* ==========================
-   Style de l'élément h2 (Titre de la section des médecins)
-========================== */
-section h2 {
-    color: rgba(46, 217, 208, 0.819);
-    font-size: 1.7rem; /* Taille du texte */
-    font-weight: 600; /* Légèrement plus gras pour attirer l'attention */
-    margin-bottom: 30px; /* Espace sous le titre */
-    text-transform: uppercase; /* Mettre le texte en majuscules */
-    letter-spacing: 1px; /* Espacement des lettres pour un effet stylisé */
-    text-align: center; /* Centrer le texte */
-}
-
 
 /* ==========================
    Style des Cartes Médecins
@@ -87,33 +68,6 @@ section h2 {
     color: white;
 }
 
-
-/* Style personnalisé pour l'inscription */
-.login_register_wrap {
-    padding: 60px 0;
-}
-
-.border_form {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.padding_eight_all {
-    padding: 40px;
-}
-
-.btn-fill-out {
-    background-color: #2cd3d0;
-    color: white;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-.btn-fill-out:hover {
-    background-color: #1fa9a7;
-}
-
-
-
+/* ==========================
+   Autres sections spécifiques (ajouter au besoin)
+========================== */
