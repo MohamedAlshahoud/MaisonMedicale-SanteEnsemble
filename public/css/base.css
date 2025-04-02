@@ -1,15 +1,27 @@
 /* ==========================
    Style Global - Header & Navbar
 ========================== */
+
 header {
     text-align: center;
-    background: red;
+    background: linear-gradient(rgba(59, 209, 202, 0.819), rgba(150, 103, 103, 0.337));
     color: white;
     padding: 20px 0;
 }
 
+header h1 {
+    font-size: 2.5rem; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    margin: 0; /* Enlever les marges */
+}
+
 .navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Assure que la navbar reste au-dessus du contenu */
+    background-color: white; /* Garde un fond blanc */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet élégant */
 }
 
 .navbar-brand {
@@ -25,9 +37,10 @@ header {
    Footer
 ========================== */
 footer {
-    background-color: #222;
+    background: linear-gradient(rgba(59, 209, 202, 0.819), rgba(150, 103, 103, 0.337));
     color: white;
     padding: 15px 0;
+    text-align: center;
 }
 
 /* ==========================
@@ -35,4 +48,23 @@ footer {
 ========================== */
 .btn {
     transition: all 0.3s ease-in-out;
+}
+
+/* ==========================
+   Styles du Body
+========================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garde toute la hauteur de l'écran */
+}
+
+.content {
+    flex: 1; /* Permet au contenu de s'étendre */
 }
