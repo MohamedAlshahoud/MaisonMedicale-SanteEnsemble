@@ -7,14 +7,18 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-lg">
+                    <!-- Appliquer la classe "form-title" ici -->
+                    <div class="card-header form-title">
+                        <h3>Choisissez une Disponibilité</h3>
+                    </div>
                     <div class="card-body">
-                        <h2 class="text-center mb-4">Choisissez une Disponibilité</h2>
                         {{ form_start(form) }}
                             <div class="mb-3">
-                                {{ form_row(form.disponibilite, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_label(form.disponibilite, null, {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.disponibilite, {'attr': {'class': 'form-select'}}) }}
                             </div>
                             <div class="text-center">
-                                {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary btn-lg'}}) }}
+                                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-custom'}}) }}
                             </div>
                         {{ form_end(form) }}
                     </div>

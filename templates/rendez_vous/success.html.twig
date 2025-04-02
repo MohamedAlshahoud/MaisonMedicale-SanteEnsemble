@@ -15,7 +15,7 @@
                     <p><strong>Médecin :</strong> {{ rendezVous.medecin.nom }} {{ rendezVous.medecin.prenom }}</p>
                     <p><strong>Date et heure :</strong> {{ rendezVous.dateHeure|date('d/m/Y H:i') }}</p>
                     <div class="mt-4">
-                        <a href="{{ path('app_accueil') }}" class="btn btn-primary">Retour à l'accueil</a>
+                        <a href="{{ path('app_accueil') }}" class="btn btn-outline-success">Retour à l'accueil</a>
                         <a href="{{ path('rendez_vous_step_1') }}" class="btn btn-outline-success">Prendre un autre rendez-vous</a>
                     </div>
                 </div>
