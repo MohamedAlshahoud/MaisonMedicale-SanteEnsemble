@@ -6,8 +6,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center bg-primary text-white">
+            <div class="card shadow-lg">
+                <!-- Appliquer la classe "form-title" ici -->
+                <div class="card-header form-title text-center">
                     <h3>Connexion</h3>
                 </div>
                 <div class="card-body">
@@ -39,16 +40,20 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Se connecter</button>
+                            <button type="submit" class="btn btn-custom">Se connecter</button> <!-- Classe personnalisée -->
                         </div>
                     </form>
                     
                     <div class="text-center mt-3">
-                        <a href="#">Mot de passe oublié ?</a>
+                        <!-- Appliquer la classe btn-custom aux liens sans bordure -->
+                        <a href="#" class="btn btn-custom btn-sm border-0">Mot de passe oublié ?</a>
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <span>Vous n'avez pas de compte ? <a href="{{ path('app_inscription') }}">Inscrivez-vous</a></span>
+                    <span>Vous n'avez pas de compte ? 
+                        <!-- Appliquer la classe btn-custom aux liens sans bordure -->
+                        <a href="{{ path('app_inscription') }}" class="btn btn-custom btn-sm border-0">Inscrivez-vous</a>
+                    </span>
                 </div>
             </div>
         </div>

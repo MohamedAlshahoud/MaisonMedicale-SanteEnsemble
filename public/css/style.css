@@ -86,6 +86,7 @@
 .btn-custom {
     background-color: white; /* Couleur de fond du bouton */
     color: #2cd3d0; /* Couleur du texte */
+    border-color: #2cd3d0;
     border-radius: 5px; /* Coins arrondis */
     padding: 10px 20px; /* Padding du bouton */
     font-size: 16px; /* Taille du texte */
@@ -95,5 +96,6 @@
 .btn-custom:hover {
     background-color: #1fa9a7; /* Couleur de fond au survol */
     cursor: pointer; /* Curseur en forme de main */
+    color: white;
 }
 
