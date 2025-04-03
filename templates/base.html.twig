@@ -44,7 +44,18 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil') }}">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ path('rendez_vous_step_1') }}">Prendre RDV</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_connexion') }}">Se connecter</a></li>
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('patient_profile', {id: app.user.id}) }}">
+                                    👤 {{ app.user.prenom }} {{ app.user.nom }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_deconnexion') }}">Se déconnecter</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_connexion') }}">Se connecter</a></li>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
                     </ul>
                 </div>
