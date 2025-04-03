@@ -39,7 +39,7 @@ final class InscriptionController extends AbstractController
         
             $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
         
-            return $this->redirectToRoute('app_connexiongin');
+            return $this->redirectToRoute('app_connexion');
         }
         
 
