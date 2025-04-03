@@ -19,6 +19,8 @@ security:
             form_login:
                 login_path: app_connexion  # Route vers la page de connexion
                 check_path: app_connexion  # Vérification des identifiants
+                username_parameter: email  # 👈 Ajout de cette ligne pour que Symfony utilise "email" au lieu de "_username"
+                password_parameter: password
             logout:
                 path: app_deconnexion  # Route de déconnexion
                 invalidate_session: true

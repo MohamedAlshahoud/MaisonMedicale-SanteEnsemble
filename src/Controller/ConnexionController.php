@@ -15,7 +15,7 @@ final class ConnexionController extends AbstractController
         // Récupérer l'utilisateur connecté
         $user = $this->getUser();
 
-        if ($user) {
+        if ($user !== null) { // Vérifie si un utilisateur est connecté
             if (in_array('ROLE_ADMIN', $user->getRoles())) {
                 return $this->redirectToRoute('admin_dashboard'); // 🔥 Redirige un admin vers le dashboard
             } else {
@@ -25,7 +25,7 @@ final class ConnexionController extends AbstractController
 
         // Récupérer les erreurs de connexion si elles existent
         $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $lastUsername = $authenticationUtils->getLastUsername() ?? ''; // Évite NULL
 
         return $this->render('connexion/connexion.html.twig', [
             'last_username' => $lastUsername,
