@@ -99,3 +99,14 @@
     color: white;
 }
 
+/* Style pour les liens avec la couleur des boutons */
+.contact-link {
+    color: #1fa9a7; /* Couleur bleue utilisée pour les boutons */
+    text-decoration: none; /* Supprimer le soulignement */
+}
+
+.contact-link:hover {
+    color: #1fa9a7; /* Couleur bleue plus foncée lors du survol */
+    text-decoration: underline; /* Ajoute un soulignement au survol */
+}
+
