@@ -1,68 +1,93 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact - Maison Médicale Santé Ensemble{% endblock %}
-
 {% block body %}
 <div class="container mt-5">
-    <!-- Titre avec classe modifiée -->
     <h1 class="form-title text-center mb-4">Contactez-nous</h1>
 
     <div class="row">
-        <!-- Formulaire de contact -->
-        <div class="col-md-6">
-            <form id="contact-form">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nom</label>
-                    <input type="text" class="form-control" id="name" placeholder="Votre nom" required>
+        <!-- Informations de contact -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="contact_wrap contact_style3 shadow-sm rounded p-4 bg-light">
+                <div class="contact_icon">
+                    <i class="linearicons-map2"></i>
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Votre email" required>
+                <div class="contact_text">
+                    <span>{% trans %}Address{% endtrans %}</span>
+                    <a href="#" class="contact-link">Rue des rivageois 7, 4000 Liège</a>
                 </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="4" placeholder="Votre message" required></textarea>
-                </div>
-                <!-- Bouton sans bordure avec la classe modifiée -->
-                <button type="submit" class="btn btn-custom">Envoyer</button>
-            </form>
-            <div id="confirmation-message" class="alert alert-success mt-3" style="display: none;">
-                Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.
             </div>
         </div>
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="contact_wrap contact_style3 shadow-sm rounded p-4 bg-light">
+                <div class="contact_icon">
+                    <i class="linearicons-envelope-open"></i>
+                </div>
+                <div class="contact_text">
+                    <span>{% trans %}Email Address{% endtrans %}</span>
+                    <a href="mailto:contact@centre-medical.com" class="contact-link">contact@centre-medical.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="contact_wrap contact_style3 shadow-sm rounded p-4 bg-light">
+                <div class="contact_icon">
+                    <i class="linearicons-tablet2"></i>
+                </div>
+                <div class="contact_text">
+                    <span>{% trans %}Phone{% endtrans %}</span>
+                    <a href="tel:+32489470853" class="contact-link">+32 489 47 08 53</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <!-- Informations de contact -->
-        <div class="col-md-6">
-            <h3>Nos coordonnées</h3>
-            <p><strong>Adresse :</strong> Rue des rivageois 7, 4000 Liège</p>
-            <p><strong>Téléphone :</strong> +32 489 47 08 53</p>
-            <p><strong>Email :</strong> contact@centre-medical.com</p>
-
-            <!-- Carte Google Maps -->
-            <div class="ratio ratio-16x9 mt-3">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5062.395648280132!2d5.572653612101251!3d50.623441774774726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0f9fc23532477%3A0x89c83abd517a0464!2sRue%20des%20Rivageois%207%2C%204000%20Li%C3%A8ge!5e0!3m2!1sfr!2sbe!4v1743101340276!5m2!1sfr!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="section pt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-md-10">
+                    <div class="border_form shadow-sm rounded p-4">
+                        <div class="heading_s1 mb-4">
+                            <h2>{% trans %}Contact Us{% endtrans %}</h2>
+                        </div>
+                        <p class="leads">{% trans %}A question, a remark, a suggestion? We will be happy to respond to you as soon as possible.{% endtrans %}</p>
+                        <div class="field_form">
+                            {{ form_start(form)}}
+                                <div class="row">
+                                    {% for message in app.flashes('contact_success') %}
+                                        <div class="col-md-12 alert alert-success alert-dismissible fade show" role="alert">{{message}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    {% endfor %}
+                                    {% for message in app.flashes('contact_error') %}
+                                        <div class="col-md-12 alert alert-danger alert-dismissible fade show" role="alert">{{message}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="form-group col-md-6 mb-3">
+                                        {{ form_row(form.nom, {'attr': {'class': 'form-control rounded-3'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-3">
+                                        {{ form_row(form.email, {'attr': {'class': 'form-control rounded-3'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-3">
+                                        {{ form_row(form.telephone, {'attr': {'class': 'form-control rounded-3'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-3">
+                                        {{ form_row(form.sujet, {'attr': {'class': 'form-control rounded-3'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-12 mb-3">
+                                        {{ form_row(form.message, {'attr': {'class': 'form-control rounded-3', 'rows': 4}}) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-block w-100 py-2">{% trans %}Envoyer Message{% endtrans %}</button>
+                                    </div>
+                                </div>
+                            {{ form_end(form)}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    // Cibler le formulaire et le message de confirmation
-    const form = document.getElementById('contact-form');
-    const confirmationMessage = document.getElementById('confirmation-message');
-
-    // Ajouter un événement d'écoute pour l'envoi du formulaire
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Empêche l'envoi réel du formulaire
-        
-        // Afficher le message de confirmation
-        confirmationMessage.style.display = 'block';
-        
-        // Réinitialiser le formulaire après un délai (optionnel)
-        setTimeout(function() {
-            form.reset();
-            confirmationMessage.style.display = 'none'; // Masque le message de confirmation
-        }, 5000); // Le formulaire et le message seront réinitialisés après 3 secondes
-    });
-</script>
 {% endblock %}

@@ -14,7 +14,7 @@ class ContactType extends AbstractType
         $builder
             ->add('nom')
             ->add('email')
-            ->add('téléphone')
+            ->add('telephone')
             ->add('sujet')
             ->add('message')
         ;
