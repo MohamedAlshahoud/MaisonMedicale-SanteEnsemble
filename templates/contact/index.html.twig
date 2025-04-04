@@ -10,7 +10,7 @@
     <div class="row">
         <!-- Formulaire de contact -->
         <div class="col-md-6">
-            <form>
+            <form id="contact-form">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nom</label>
                     <input type="text" class="form-control" id="name" placeholder="Votre nom" required>
@@ -26,6 +26,9 @@
                 <!-- Bouton sans bordure avec la classe modifiée -->
                 <button type="submit" class="btn btn-custom">Envoyer</button>
             </form>
+            <div id="confirmation-message" class="alert alert-success mt-3" style="display: none;">
+                Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.
+            </div>
         </div>
 
         <!-- Informations de contact -->
@@ -42,4 +45,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Cibler le formulaire et le message de confirmation
+    const form = document.getElementById('contact-form');
+    const confirmationMessage = document.getElementById('confirmation-message');
+
+    // Ajouter un événement d'écoute pour l'envoi du formulaire
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche l'envoi réel du formulaire
+        
+        // Afficher le message de confirmation
+        confirmationMessage.style.display = 'block';
+        
+        // Réinitialiser le formulaire après un délai (optionnel)
+        setTimeout(function() {
+            form.reset();
+            confirmationMessage.style.display = 'none'; // Masque le message de confirmation
+        }, 5000); // Le formulaire et le message seront réinitialisés après 3 secondes
+    });
+</script>
 {% endblock %}
