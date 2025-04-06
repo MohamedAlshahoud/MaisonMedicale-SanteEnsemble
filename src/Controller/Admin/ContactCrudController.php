@@ -37,7 +37,7 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('telephone'),
             TextField::new('sujet'),
             TextareaField::new('message'),
-            BooleanField::new('isLu', 'Lu'),
+            BooleanField::new('Lu', 'Lu'),
         ];
     }
 }
