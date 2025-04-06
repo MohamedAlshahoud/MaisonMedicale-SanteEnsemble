@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\ContactRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ final class ContactController extends AbstractController
 {
 
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
-    public function index(Request $request, ContactRepository $contactRepository): Response
+    public function index(Request $request, ContactRepository $contactRepository, EntityManagerInterface $entityManager): Response
     {
 
         $contact = new Contact();
@@ -23,7 +24,8 @@ final class ContactController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contactRepository->save($contact, true);
+            $entityManager->persist($contact);
+            $entityManager->flush();
 
             // envoi email
 
