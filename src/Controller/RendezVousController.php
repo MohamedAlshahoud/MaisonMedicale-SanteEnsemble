@@ -22,7 +22,7 @@ final class RendezVousController extends AbstractController
 
         // Vérifier s'il y a des médecins généralistes disponibles
         if (empty($medecins)) {
-            $this->addFlash('error', 'Aucun médecin généraliste disponible');
+            $this->addFlash('error', 'Aucun médecin disponible');
             return $this->redirectToRoute('app_accueil'); // Rediriger vers la page d'accueil
         }
 
@@ -35,7 +35,7 @@ final class RendezVousController extends AbstractController
                     }, $medecins),
                     $medecins // Associer chaque médecin à l'objet Medecin
                 ),
-                'label' => 'Choisissez un médecin généraliste'
+                'label' => 'Choisissez un médecin'
             ])
             ->add('submit', SubmitType::class, ['label' => 'Continuer'])
             ->getForm();
