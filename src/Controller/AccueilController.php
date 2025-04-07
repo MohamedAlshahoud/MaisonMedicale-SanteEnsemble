@@ -37,7 +37,8 @@ final class AccueilController extends AbstractController
     {
         // Récupérer tous les médecins généralistes depuis la base de données
         // Si tu veux un affichage spécifique des médecins généralistes
-        $medecins = $this->entityManager->getRepository(Medecin::class)->findBy(['isGeneraliste' => true]);
+        //$medecins = $this->entityManager->getRepository(Medecin::class)->findBy(['isGeneraliste' => true]);
+        $medecins = $this->entityManager->getRepository(Medecin::class)->findAll();
 
         // Renvoyer la vue avec tous les médecins
         return $this->render('accueil/tous_medecins.html.twig', [

@@ -14,21 +14,40 @@
 
     <!-- Section des médecins disponibles -->
     <section class="container mt-5">
-        <h2>Nos médecins disponibles</h2>
-        <div class="row justify-content-center">
+        <h2 class="text-center mb-4">Tous nos médecins</h2>
+
+        <div class="row">
             {% for medecin in medecins %}
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ medecin.nom }} {{ medecin.prenom }}</h5>
-                            <p class="card-text text-muted">Médecin généraliste</p>
-                            <a href="#" class="btn btn-outline-primary mt-2">Voir Profil</a>
+                <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch mb-4">
+                    <div class="card w-100 shadow-sm">
+                        <div class="card-body text-center">
+
+                            {# Photo du médecin (optionnelle) #}
+                            {% if medecin.photo is defined and medecin.photo %}
+                                <img src="{{ asset('images/medecins/' ~ medecin.photo) }}"
+                                    alt="Photo de {{ medecin.nom }}"
+                                    class="img-fluid rounded-circle mb-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                            {% else %}
+                                <div class="mb-3">
+                                    <i class="fas fa-user-md fa-3x text-secondary"></i>
+                                </div>
+                            {% endif %}
+
+                            <h5 class="card-title">{{ medecin.prenom }} {{ medecin.nom }}</h5>
+
+                            {# Spécialité ou "Médecin généraliste" par défaut #}
+                            <p class="card-text text-muted">
+                                {{ medecin.specialite is defined and medecin.specialite ? medecin.specialite : 'Médecin généraliste' }}
+                            </p>
+
+                            <a href="#" class="btn btn-outline-primary">Voir Profil</a>
                         </div>
                     </div>
                 </div>
             {% else %}
-                <div class="col-12">
-                    <p class="text-center text-danger">Aucun médecin disponible pour l'instant.</p>
+                <div class="col-12 text-center">
+                    <p class="text-danger">Aucun médecin n’est disponible pour le moment.</p>
                 </div>
             {% endfor %}
         </div>
