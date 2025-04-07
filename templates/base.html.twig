@@ -71,9 +71,73 @@
         </div>
 
         <!-- Footer -->
-        <footer class="bg-dark text-light text-center py-3">
-            <p class="mb-0">© 2025 Maison Médicale Santé Ensemble - Tous droits réservés.</p>
+        <footer class="bg-dark text-light pt-5 pb-4 mt-5">
+            <div class="container text-md-start text-center">
+                <div class="row">
+
+                    <!-- Informations -->
+                    <div class="col-md-3 mb-4">
+                        <h5 class="text-uppercase fw-bold">Maison Médicale</h5>
+                        <p>
+                            🏥 Santé Ensemble<br>
+                            Votre centre médical pluridisciplinaire à votre écoute.
+                        </p>
+                    </div>
+
+                    <!-- Horaires -->
+                    <div class="col-md-3 mb-4">
+                        <h5 class="text-uppercase fw-bold">Horaires</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-clock me-2"></i>Lun - Ven : 09h - 18h</li>
+                            <li><i class="fas fa-clock me-2"></i>Sam - Dim : Fermé</li>
+                        </ul>
+                    </div>
+
+                    <!-- Liens utiles -->
+                    <div class="col-md-3 mb-4">
+                        <h5 class="text-uppercase fw-bold">Liens utiles</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ path('app_accueil') }}" class="text-light text-decoration-none">Accueil</a></li>
+                            <li><a href="{{ path('rendez_vous_step_1') }}" class="text-light text-decoration-none">Prendre RDV</a></li>
+                            <li><a href="{{ path('app_contact') }}" class="text-light text-decoration-none">Contact</a></li>
+                            {% if app.user %}
+                                <li><a href="{{ path('patient_profile', {id: app.user.id}) }}" class="text-light text-decoration-none">Mon Profil</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('admin_dashboard') }}" class="text-light text-decoration-none">Espace Admin</a></li>
+                                {% endif %}
+                                <li><a href="{{ path('app_deconnexion') }}" class="text-light text-decoration-none">Se déconnecter</a></li>
+                            {% else %}
+                                <li><a href="{{ path('app_connexion') }}" class="text-light text-decoration-none">Se connecter</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="col-md-3 mb-4">
+                        <h5 class="text-uppercase fw-bold">Contact</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-map-marker-alt me-2"></i>Rue des rivageois 7, 4000 Liège</li>
+                            <li><i class="fas fa-phone-alt me-2"></i><a href="tel:+32489470853" class="text-light text-decoration-none">0489 47 08 53</a></li>
+                            <li><i class="fas fa-envelope me-2"></i><a href="mailto:contact@maison-medicale.com" class="text-light text-decoration-none">info@santeensemble.be</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Réseaux sociaux -->
+                <div class="text-center mt-4">
+                    <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+
+                <!-- Droits -->
+                <div class="text-center mt-3">
+                    <small>© 2025 Maison Médicale Santé Ensemble - Tous droits réservés.</small>
+                </div>
+            </div>
         </footer>
+
     </div>
 
     <!-- Bootstrap JS -->
