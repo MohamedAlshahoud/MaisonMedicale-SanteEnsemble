@@ -16,6 +16,17 @@ class MedecinRepository extends ServiceEntityRepository
         parent::__construct($registry, Medecin::class);
     }
 
+
+    public function findDisponiblesSansRendezVous(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.rendezVous', 'r')
+            ->where('m.isGeneraliste = true')
+            ->andWhere('r.id IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Medecin[] Returns an array of Medecin objects
     //     */
