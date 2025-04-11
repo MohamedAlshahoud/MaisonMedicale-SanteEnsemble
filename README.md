@@ -100,6 +100,6 @@ Ce projet est sous la licence MIT.
 ---
 # 🧑‍💻 Auteurs
 
-- **Mohamed Alshahoud** - Développeur
+- **Mohamed Alshahoud** - Développeur Web Full Stack
 
 ---
