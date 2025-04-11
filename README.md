@@ -73,7 +73,7 @@ Bienvenue sur **Maison Médicale Santé Ensemble** ! Ce projet est une plateform
 
 # 📢 Contactez-nous
 
-- **Téléphone** : Vous pouvez nous joindre au 01 23 45 67 89 pour toute information ou prise de rendez-vous.
+- **Téléphone** : Vous pouvez nous joindre au 0489 47 08 53 pour toute information ou prise de rendez-vous.
 - **Formulaire de Contact** : Vous pouvez également nous contacter via notre formulaire de contact pour toute question ou demande spécifique.
 
 ---
