@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choisir un Médecin{% endblock %}
+{% block title %}Choisir une disponibilité{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
@@ -8,13 +8,13 @@
         <div class="col-md-6">
             <div class="card shadow-lg">
                 <div class="card-header form-title">
-                    <h3>Choisissez un Médecin</h3>
+                    <h3>Choisissez un créneau disponible</h3>
                 </div>
                 <div class="card-body">
                     {{ form_start(form) }}
                     <div class="mb-3">
-                        {{ form_label(form.medecin, null, {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(form.medecin, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_label(form.disponibilite, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.disponibilite, {'attr': {'class': 'form-select'}}) }}
                     </div>
                     <div class="text-center">
                         {{ form_widget(form.submit, {'attr': {'class': 'btn btn-custom'}}) }}

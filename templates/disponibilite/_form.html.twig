@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_row(form.medecin) }}
+    {{ form_row(form.debut) }}
+    {{ form_row(form.fin) }}
+    {{ form_row(form.estLibre) }}
+    <button class="btn btn-success mt-2">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

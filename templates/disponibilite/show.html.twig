@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Disponibilité{% endblock %}
+
+{% block body %}
+<h1>Détails de la Disponibilité</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>{{ disponibilite.id }}</td>
+    </tr>
+    <tr>
+        <th>Médecin</th>
+        <td>{{ disponibilite.medecin.nom }} {{ disponibilite.medecin.prenom }}</td>
+    </tr>
+    <tr>
+        <th>Début</th>
+        <td>{{ disponibilite.debut ? disponibilite.debut|date('d/m/Y H:i') : '' }}</td>
+    </tr>
+    <tr>
+        <th>Fin</th>
+        <td>{{ disponibilite.fin ? disponibilite.fin|date('d/m/Y H:i') : '' }}</td>
+    </tr>
+    <tr>
+        <th>Disponible ?</th>
+        <td>{{ disponibilite.estLibre ? 'Oui' : 'Non' }}</td>
+    </tr>
+</table>
+
+<a href="{{ path('app_disponibilite_edit', {'id': disponibilite.id}) }}" class="btn btn-warning">Modifier</a>
+<a href="{{ path('app_disponibilite_index') }}" class="btn btn-secondary">Retour à la liste</a>
+{% endblock %}

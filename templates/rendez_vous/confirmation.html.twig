@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmer le Rendez-vous{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body text-center">
+                    <h2 class="mb-4">Confirmez votre rendez-vous</h2>
+                    <p><strong>Médecin :</strong> Dr. {{ medecin.nom }} {{ medecin.prenom }}</p>
+                    <p><strong>Date et heure :</strong> {{ disponibilite.debut|date('d/m/Y H:i') }}</p>
+
+                    {{ form_start(form) }}
+                        {{ form_widget(form.confirm, {'attr': {'class': 'btn btn-success btn-lg'}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

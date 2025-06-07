@@ -13,7 +13,6 @@ class Medecin
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -22,18 +21,25 @@ class Medecin
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    #[ORM\Column(type:"boolean")]
-    private $isGeneraliste;
+    #[ORM\Column(type: "boolean")]
+    private bool $isGeneraliste;
 
     /**
      * @var Collection<int, RendezVous>
      */
-    #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'medecin')]
+    #[ORM\OneToMany(mappedBy: 'medecin', targetEntity: RendezVous::class)]
     private Collection $rendezVouses;
+
+    /**
+     * @var Collection<int, Disponibilite>
+     */
+    #[ORM\OneToMany(mappedBy: 'medecin', targetEntity: Disponibilite::class, cascade: ['persist', 'remove'])]
+    private Collection $disponibilites;
 
     public function __construct()
     {
         $this->rendezVouses = new ArrayCollection();
+        $this->disponibilites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,7 +55,6 @@ class Medecin
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -61,7 +66,17 @@ class Medecin
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
+        return $this;
+    }
 
+    public function getIsGeneraliste(): bool
+    {
+        return $this->isGeneraliste;
+    }
+
+    public function setIsGeneraliste(bool $isGeneraliste): static
+    {
+        $this->isGeneraliste = $isGeneraliste;
         return $this;
     }
 
@@ -86,7 +101,6 @@ class Medecin
     public function removeRendezVouse(RendezVous $rendezVouse): static
     {
         if ($this->rendezVouses->removeElement($rendezVouse)) {
-            // set the owning side to null (unless already changed)
             if ($rendezVouse->getMedecin() === $this) {
                 $rendezVouse->setMedecin(null);
             }
@@ -95,14 +109,37 @@ class Medecin
         return $this;
     }
 
-    public function getIsGeneraliste(): ?bool
+    /**
+     * @return Collection<int, Disponibilite>
+     */
+    public function getDisponibilites(): Collection
     {
-        return $this->isGeneraliste;
+        return $this->disponibilites;
     }
 
-    public function setIsGeneraliste(bool $isGeneraliste): self
+    public function addDisponibilite(Disponibilite $disponibilite): static
     {
-        $this->isGeneraliste = $isGeneraliste;
+        if (!$this->disponibilites->contains($disponibilite)) {
+            $this->disponibilites->add($disponibilite);
+            $disponibilite->setMedecin($this);
+        }
+
         return $this;
+    }
+
+    public function removeDisponibilite(Disponibilite $disponibilite): static
+    {
+        if ($this->disponibilites->removeElement($disponibilite)) {
+            if ($disponibilite->getMedecin() === $this) {
+                $disponibilite->setMedecin(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->prenom . ' ' . $this->nom;
     }
 }

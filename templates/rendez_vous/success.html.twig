@@ -12,7 +12,7 @@
                     <h2 class="text-success">Votre rendez-vous a été confirmé !</h2>
                     <p class="lead">Merci d'avoir pris rendez-vous avec nous.</p>
                     <hr>
-                    <p><strong>Médecin :</strong> {{ rendezVous.medecin.nom }} {{ rendezVous.medecin.prenom }}</p>
+                    <p><strong>Médecin :</strong> Dr. {{ rendezVous.medecin.nom }} {{ rendezVous.medecin.prenom }}</p>
                     <p><strong>Date et heure :</strong> {{ rendezVous.dateHeure|date('d/m/Y H:i') }}</p>
                     <div class="mt-4">
                         <a href="{{ path('app_accueil') }}" class="btn btn-outline-success">Retour à l'accueil</a>

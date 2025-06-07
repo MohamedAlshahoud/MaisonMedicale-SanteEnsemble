@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une Disponibilité{% endblock %}
+
+{% block body %}
+<h1>Ajouter une Disponibilité</h1>
+
+{{ include('disponibilite/_form.html.twig', {'form': form, 'button_label': 'Créer'}) }}
+
+<a href="{{ path('app_disponibilite_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+{% endblock %}

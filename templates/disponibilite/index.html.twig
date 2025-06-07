@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Disponibilités{% endblock %}
+
+{% block body %}
+<h1>Liste des Disponibilités</h1>
+
+<a href="{{ path('app_disponibilite_new') }}" class="btn btn-primary mb-3">Ajouter une disponibilité</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Médecin</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Disponible ?</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for disponibilite in disponibilites %}
+            <tr>
+                <td>{{ disponibilite.id }}</td>
+                <td>{{ disponibilite.medecin.nom }} {{ disponibilite.medecin.prenom }}</td>
+                <td>{{ disponibilite.debut ? disponibilite.debut|date('d/m/Y H:i') : '' }}</td>
+                <td>{{ disponibilite.fin ? disponibilite.fin|date('d/m/Y H:i') : '' }}</td>
+                <td>{{ disponibilite.estLibre ? 'Oui' : 'Non' }}</td>
+                <td>
+                    <a href="{{ path('app_disponibilite_show', {'id': disponibilite.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                    <a href="{{ path('app_disponibilite_edit', {'id': disponibilite.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    <form method="post" action="{{ path('app_disponibilite_delete', {'id': disponibilite.id}) }}" style="display:inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer cette disponibilité ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ disponibilite.id) }}">
+                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">Aucune disponibilité trouvée</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
