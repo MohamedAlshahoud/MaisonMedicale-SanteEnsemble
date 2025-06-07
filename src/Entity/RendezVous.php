@@ -14,9 +14,13 @@ class RendezVous
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'rendezVouses', cascade: ['persist'])]
+    #[ORM\ManyToOne(inversedBy: 'rendezVous', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Medecin $medecin = null;
+
+    #[ORM\ManyToOne(inversedBy: 'rendezVous', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Patient $patient = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateHeure = null;
@@ -34,7 +38,17 @@ class RendezVous
     public function setMedecin(?Medecin $medecin): static
     {
         $this->medecin = $medecin;
+        return $this;
+    }
 
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): static
+    {
+        $this->patient = $patient;
         return $this;
     }
 
@@ -46,7 +60,6 @@ class RendezVous
     public function setDateHeure(\DateTimeInterface $dateHeure): static
     {
         $this->dateHeure = $dateHeure;
-
         return $this;
     }
 }
