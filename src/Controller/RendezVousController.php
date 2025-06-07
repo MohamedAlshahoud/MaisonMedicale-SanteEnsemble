@@ -20,20 +20,17 @@ final class RendezVousController extends AbstractController
         // Récupérer tous les médecins généralistes depuis la base de données
         $medecins = $entityManager->getRepository(Medecin::class)->findBy(['isGeneraliste' => true]);
 
-        // Vérifier s'il y a des médecins généralistes disponibles
         if (empty($medecins)) {
             $this->addFlash('error', 'Aucun médecin disponible');
-            return $this->redirectToRoute('app_accueil'); // Rediriger vers la page d'accueil
+            return $this->redirectToRoute('app_accueil');
         }
 
         // Création du formulaire pour choisir un médecin
         $form = $this->createFormBuilder()
             ->add('medecin', ChoiceType::class, [
                 'choices' => array_combine(
-                    array_map(function ($medecin) {
-                        return $medecin->getNom() . ' ' . $medecin->getPrenom(); // Affichage du nom complet du médecin
-                    }, $medecins),
-                    $medecins // Associer chaque médecin à l'objet Medecin
+                    array_map(fn($medecin) => $medecin->getNom() . ' ' . $medecin->getPrenom(), $medecins),
+                    array_map(fn($medecin) => $medecin->getId(), $medecins)
                 ),
                 'label' => 'Choisissez un médecin'
             ])
@@ -43,11 +40,11 @@ final class RendezVousController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $medecinChoisi = $form->get('medecin')->getData();
-            // Stocker le médecin choisi dans la session
-            $request->getSession()->set('medecin', $medecinChoisi);
+            $medecinId = $form->get('medecin')->getData();
 
-            // Rediriger vers la page suivante (choisir une disponibilité)
+            // Stocker seulement l'ID du médecin en session
+            $request->getSession()->set('medecin_id', $medecinId);
+
             return $this->redirectToRoute('rendez_vous_step_2');
         }
 
@@ -56,13 +53,18 @@ final class RendezVousController extends AbstractController
         ]);
     }
 
-
     #[Route('/rendez-vous/choisir-disponibilite', name: 'rendez_vous_step_2')]
     public function step2(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $medecinChoisi = $request->getSession()->get('medecin');
+        $medecinId = $request->getSession()->get('medecin_id');
+        if (!$medecinId) {
+            return $this->redirectToRoute('rendez_vous_step_1');
+        }
 
+        // Récupérer le médecin depuis la base via l'ID
+        $medecinChoisi = $entityManager->getRepository(Medecin::class)->find($medecinId);
         if (!$medecinChoisi) {
+            $this->addFlash('error', 'Médecin non trouvé.');
             return $this->redirectToRoute('rendez_vous_step_1');
         }
 
@@ -104,6 +106,4 @@ final class RendezVousController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 }
-

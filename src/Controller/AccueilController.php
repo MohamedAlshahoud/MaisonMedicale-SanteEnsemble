@@ -22,13 +22,10 @@ final class AccueilController extends AbstractController
     #[Route('/', name: 'app_accueil')]
     public function index(): Response
     {
-        // Récupérer tous les médecins généralistes depuis la base de données
-        // Ajouter un filtre si nécessaire, par exemple en vérifiant si les médecins sont généralistes
+        $medecins = $this->medecinRepository->findAll();
 
-
-        // Renvoyer la vue avec les médecins
         return $this->render('accueil/index.html.twig', [
-            'medecins' => $this->medecinRepository->findAll()
+            'medecins' => $medecins
         ]);
     }
 
