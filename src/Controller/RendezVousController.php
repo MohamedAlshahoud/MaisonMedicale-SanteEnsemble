@@ -65,10 +65,8 @@ final class RendezVousController extends AbstractController
             return $this->redirectToRoute('rendez_vous_step_1');
         }
 
-        // Récupérer les disponibilités du médecin
         $disponibilites = $dispoRepo->findDisponibilitesByMedecin($medecin);
 
-        // Formulaire pour choisir la disponibilité
         $form = $this->createFormBuilder()
             ->add('disponibilite', ChoiceType::class, [
                 'choices' => array_combine(
@@ -112,18 +110,16 @@ final class RendezVousController extends AbstractController
         $medecin = $medecinRepo->find($medecinId);
         $disponibilite = $dispoRepo->find($disponibiliteId);
 
-        if (!$medecin || !$disponibilite) {
-            $this->addFlash('error', 'Médecin ou disponibilité introuvable.');
+        if (!$disponibilite) {
+            $this->addFlash('error', 'Cette disponibilité n’est plus valide ou a déjà été réservée.');
             return $this->redirectToRoute('rendez_vous_step_1');
         }
 
-        // ✅ Vérifie que l'utilisateur est bien un patient
         $user = $this->getUser();
         if (!$user instanceof \App\Entity\Patient) {
             throw new \LogicException('L’utilisateur connecté n’est pas un patient.');
         }
 
-        // Formulaire de confirmation
         $form = $this->createFormBuilder()
             ->add('confirm', SubmitType::class, ['label' => 'Confirmer le rendez-vous'])
             ->getForm();
@@ -133,15 +129,14 @@ final class RendezVousController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $rendezVous = new RendezVous();
             $rendezVous->setMedecin($medecin);
-            $rendezVous->setDateHeure($disponibilite->getDebut()); // ⚠️ Utilise bien `getDebut()`
-            $rendezVous->setPatient($user); // ✅ Ajout du patient
+            $rendezVous->setDateHeure($disponibilite->getDebut());
+            $rendezVous->setPatient($user);
 
-            // Optionnel : rendre la disponibilité non libre
-            $disponibilite->setEstLibre(false);
+            // Supprime la disponibilité après réservation
+            $em->remove($disponibilite);
             $em->persist($rendezVous);
             $em->flush();
 
-            // Nettoyage de la session
             $request->getSession()->remove('medecin_id');
             $request->getSession()->remove('disponibilite_id');
 
@@ -155,12 +150,52 @@ final class RendezVousController extends AbstractController
         ]);
     }
 
-
     #[Route('/rendez-vous/success/{id}', name: 'rendez_vous_success')]
     public function success(RendezVous $rendezVous): Response
     {
         return $this->render('rendez_vous/success.html.twig', [
             'rendezVous' => $rendezVous,
         ]);
+    }
+
+    #[Route('/mes-rendezvous', name: 'mes_rendezvous')]
+    public function mesRendezvous(EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user instanceof \App\Entity\Patient) {
+            throw $this->createAccessDeniedException('Accès refusé.');
+        }
+
+        $rendezvous = $em->getRepository(RendezVous::class)->findBy(['patient' => $user], ['dateHeure' => 'ASC']);
+
+        return $this->render('patient/rendezvous.html.twig', [
+            'rendezvous' => $rendezvous,
+            'patient' => $user,
+        ]);
+    }
+
+    #[Route('/rendez-vous/annuler/{id}', name: 'rendez_vous_annuler', methods: ['GET', 'POST'])]
+    public function annuler(RendezVous $rendezVous, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\Patient || $rendezVous->getPatient()->getId() !== $user->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas annuler ce rendez-vous.');
+        }
+
+        // Recréer la disponibilité associée au rendez-vous
+        $disponibilite = new \App\Entity\Disponibilite();
+        $disponibilite->setMedecin($rendezVous->getMedecin());
+        $disponibilite->setDebut($rendezVous->getDateHeure());
+        $disponibilite->setFin((clone $rendezVous->getDateHeure())->modify('+30 minutes')); // ou la durée exacte
+        $disponibilite->setEstLibre(true);
+
+        $em->persist($disponibilite);
+        $em->remove($rendezVous);
+        $em->flush();
+
+        $this->addFlash('success', 'Rendez-vous annulé avec succès.');
+
+        return $this->redirectToRoute('mes_rendezvous');
     }
 }

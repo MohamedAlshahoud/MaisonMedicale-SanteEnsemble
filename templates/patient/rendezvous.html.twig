@@ -9,9 +9,16 @@
     {% if rendezvous is not empty %}
         <ul class="list-group">
             {% for rdv in rendezvous %}
-                <li class="list-group-item">
-                    <strong>Date :</strong> {{ rdv.dateHeure|date('d/m/Y H:i') }}<br>
-                    <strong>Médecin :</strong> Dr {{ rdv.medecin.prenom }} {{ rdv.medecin.nom }}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>Date :</strong> {{ rdv.dateHeure|date('d/m/Y H:i') }}<br>
+                        <strong>Médecin :</strong> Dr {{ rdv.medecin.prenom }} {{ rdv.medecin.nom }}
+                    </div>
+                    <a href="{{ path('rendez_vous_annuler', { id: rdv.id }) }}" 
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Voulez-vous vraiment annuler ce rendez-vous ?');">
+                        Annuler
+                    </a>
                 </li>
             {% endfor %}
         </ul>
