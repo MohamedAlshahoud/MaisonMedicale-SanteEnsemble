@@ -56,20 +56,18 @@ final class RendezVousController extends AbstractController
         ]);
     }
 
+
     #[Route('/rendez-vous/choisir-disponibilite', name: 'rendez_vous_step_2')]
     public function step2(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Récupérer le médecin choisi dans la session
         $medecinChoisi = $request->getSession()->get('medecin');
 
         if (!$medecinChoisi) {
-            return $this->redirectToRoute('rendez_vous_step_1'); // Si le médecin n'est pas défini, revenir à la première étape
+            return $this->redirectToRoute('rendez_vous_step_1');
         }
 
-        // Pour l'exemple, chaque médecin a des créneaux de disponibilité
-        $disponibilites = ['2025-03-30 10:00', '2025-03-30 14:00', '2025-03-31 09:00']; // Ceci devrait venir de la base de données
+        $disponibilites = ['2025-03-30 10:00', '2025-03-30 14:00', '2025-03-31 09:00'];
 
-        // Création du formulaire pour choisir une disponibilité
         $form = $this->createFormBuilder()
             ->add('disponibilite', ChoiceType::class, [
                 'choices' => array_combine($disponibilites, $disponibilites),
@@ -83,16 +81,20 @@ final class RendezVousController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $disponibiliteChoisie = $form->get('disponibilite')->getData();
 
-            // Créer un rendez-vous avec le médecin choisi et la disponibilité sélectionnée
             $rendezVous = new RendezVous();
             $rendezVous->setMedecin($medecinChoisi);
             $rendezVous->setDateHeure(new \DateTime($disponibiliteChoisie));
 
-            // Sauvegarder le rendez-vous dans la base de données
+            $patient = $this->getUser();
+            if (!$patient) {
+                $this->addFlash('error', 'Vous devez être connecté pour prendre un rendez-vous.');
+                return $this->redirectToRoute('app_login');
+            }
+            $rendezVous->setPatient($patient);
+
             $entityManager->persist($rendezVous);
             $entityManager->flush();
 
-            // Afficher un message de succès ou rediriger vers une autre page
             return $this->render('rendez_vous/success.html.twig', [
                 'rendezVous' => $rendezVous,
             ]);
@@ -102,5 +104,6 @@ final class RendezVousController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 }
 
