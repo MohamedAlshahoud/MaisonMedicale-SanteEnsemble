@@ -12,18 +12,13 @@
                     <div class="dashboard_menu">
                         <ul class="nav nav-tabs flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ path('patient_profile', {id: patient.id}) }}">
+                                <a class="nav-link " href="{{ path('patient_profile', {id: patient.id}) }}">
                                     <i class="fas fa-user"></i> Mon compte
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('patient_rendezvous', { id: patient.id }) }}">
+                                <a class="nav-link active" href="{{ path('patient_rendezvous', { id: patient.id }) }}">
                                     <i class="ti-calendar"></i> Mes Rendez-vous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="ti-location-pin"></i> Mon Adresse
                                 </a>
                             </li>
                         </ul>
