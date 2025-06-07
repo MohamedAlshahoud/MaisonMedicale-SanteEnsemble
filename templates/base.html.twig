@@ -40,7 +40,14 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil') }}">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('rendez_vous_step_1') }}">Prendre RDV</a></li>
+                        <li class="nav-item">
+                            {% if app.user %}
+                                <a class="nav-link" href="{{ path('rendez_vous_step_1') }}">Prendre RDV</a>
+                            {% else %}
+                                <a class="nav-link" href="{{ path('app_connexion') }}" >Prendre RDV</a>
+                            {% endif %}
+                        </li>
+
                         {% if app.user %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('patient_profile', {id: app.user.id}) }}">
@@ -98,7 +105,13 @@
                         <h5 class="text-uppercase fw-bold">Liens utiles</h5>
                         <ul class="list-unstyled">
                             <li><a href="{{ path('app_accueil') }}" class="text-light text-decoration-none">Accueil</a></li>
-                            <li><a href="{{ path('rendez_vous_step_1') }}" class="text-light text-decoration-none">Prendre RDV</a></li>
+                            <li>
+                                {% if app.user %}
+                                    <a href="{{path('rendez_vous_step_1')}}" class="text-light text-decoration-none">Prendre RDV</a>
+                                {% else %}
+                                    <a href="{{path('app_connexion')}}" class="text-light text-decoration-none">Prendre RDV</a>
+                                {% endif %}
+                            </li>
                             <li><a href="{{ path('app_contact') }}" class="text-light text-decoration-none">Contact</a></li>
                             {% if app.user %}
                                 <li><a href="{{ path('patient_profile', {id: app.user.id}) }}" class="text-light text-decoration-none">Mon Profil</a></li>
