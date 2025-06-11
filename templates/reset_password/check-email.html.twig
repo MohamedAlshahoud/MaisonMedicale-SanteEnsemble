@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérifiez votre email{% endblock %}
+
+{% block body %}
+<p>Un email de réinitialisation a été envoyé si un compte correspond à cette adresse.</p>
+
+<a href="{{ path('app_connexion') }}">Retour à la connexion</a>
+{% endblock %}

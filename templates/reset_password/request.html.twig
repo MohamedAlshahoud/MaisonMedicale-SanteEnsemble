@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisation du mot de passe{% endblock %}
+
+{% block body %}
+<h1>Réinitialiser mon mot de passe</h1>
+
+{{ form_start(requestForm) }}
+    {{ form_row(requestForm.email) }}
+    <button class="btn btn-primary">Envoyer</button>
+{{ form_end(requestForm) }}
+
+<a href="{{ path('app_connexion') }}">Retour à la connexion</a>
+{% endblock %}
