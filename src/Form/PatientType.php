@@ -31,7 +31,7 @@ class PatientType extends AbstractType
         ->add('plainMotDePasse', RepeatedType::class, [
             'type' => PasswordType::class,
             'mapped' => false, // Ce champ ne doit pas être directement mappé à l'entité
-            'required' => true,
+            'required' => false,
             'first_options'  => ['label' => 'Mot de passe'],
             'second_options' => ['label' => 'Confirmez le mot de passe'],
         ])

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Profil{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Modifier mon profil</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainMotDePasse.first) }}
+        {{ form_row(form.plainMotDePasse.second) }}
+        {{ form_row(form.dateNaissance) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}
