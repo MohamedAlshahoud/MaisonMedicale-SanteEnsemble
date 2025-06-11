@@ -18,7 +18,9 @@ final class InscriptionController extends AbstractController
     public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $patient = new Patient();
-        $form = $this->createForm(PatientType::class, $patient);
+        $form = $this->createForm(PatientType::class, $patient, [
+            'submit_label' => "S'inscrire"
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

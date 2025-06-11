@@ -34,7 +34,9 @@ final class PatientController extends AbstractController
     #[Route('/patient/{id}/edit', name: 'patient_edit', requirements: ['id' => Requirement::DIGITS])]
     public function edit(Request $request, Patient $patient, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(PatientType::class, $patient);
+        $form = $this->createForm(PatientType::class, $patient, [
+            'submit_label' => 'Modifier'
+        ]);
         $form->handleRequest($request);
 
         // Supprime l'obligation de changer le mot de passe

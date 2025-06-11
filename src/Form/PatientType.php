@@ -46,7 +46,7 @@ class PatientType extends AbstractType
             'label' => 'Téléphone'
         ])
         ->add('submit', SubmitType::class, [
-            'label' => "S'inscrire"
+            'label' => $options['submit_label'] ?? 'Valider'
         ]);
     }
 
@@ -54,6 +54,7 @@ class PatientType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Patient::class,
+            'submit_label' => 'S\'inscrire' // valeur par défaut
         ]);
     }
 }
