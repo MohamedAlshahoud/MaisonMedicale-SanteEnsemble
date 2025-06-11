@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PatientType extends AbstractType
+class PatientEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -22,17 +22,10 @@ class PatientType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('plainMotDePasse', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmez le mot de passe'],
-            ])
             ->add('dateNaissance')
             ->add('adresse')
             ->add('telephone')
-            ->add('submit', SubmitType::class, ['label' => "S'inscrire"]);
+            ->add('submit', SubmitType::class, ['label' => 'Modifier']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

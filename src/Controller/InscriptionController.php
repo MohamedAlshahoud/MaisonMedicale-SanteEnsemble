@@ -19,7 +19,8 @@ final class InscriptionController extends AbstractController
     {
         $patient = new Patient();
         $form = $this->createForm(PatientType::class, $patient, [
-            'submit_label' => "S'inscrire"
+            'submit_label' => "S'inscrire",
+            'is_edit' => false // le champ mot de passe s'affiche
         ]);
         $form->handleRequest($request);
 

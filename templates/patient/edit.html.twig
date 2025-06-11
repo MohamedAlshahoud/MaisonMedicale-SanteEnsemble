@@ -4,54 +4,20 @@
 
 {% block body %}
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow rounded">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Modifier mon profil</h4>
-                </div>
-                <div class="card-body">
+    <h1>Modifier mon profil</h1>
 
-                    {{ form_start(form) }}
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.nom) }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.prenom) }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.email) }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.dateNaissance) }}
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            {{ form_row(form.adresse) }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.telephone) }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.plainMotDePasse.first) }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form_row(form.plainMotDePasse.second) }}
-                        </div>
-                    </div>
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.dateNaissance) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
 
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ path('patient_profile', { id: patient.id }) }}" class="btn btn-secondary">
-                            ← Retour au profil
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            Modifier
-                        </button>
-                    </div>
-                    {{ form_end(form) }}
-                </div>
-            </div>
-        </div>
-    </div>
+    <a href="{{ path('patient_profile', {id: patient.id}) }}" class="btn btn-outline-secondary mt-3">
+        ← Retour au profil
+    </a>
 </div>
 {% endblock %}
