@@ -52,5 +52,13 @@ final class PatientController extends AbstractController
         ]);
     }
 
+    
+    #[Route('/patient/changepassword', name: 'patient_change_password')]
+    public function changepassword(): Response
+    {
+        
+
+        return $this->render('patient/changepassword.html.twig');
+    }
 
 }
