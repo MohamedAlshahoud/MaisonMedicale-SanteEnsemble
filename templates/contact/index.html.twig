@@ -51,38 +51,10 @@
                         </div>
                         <p class="leads">Une question, une remarque, une suggestion ? Nous nous ferons un plaisir de vous répondre dans les plus brefs délais..</p>
                         <div class="field_form">
-                            {{ form_start(form)}}
-                                <div class="row">
-                                    {% for message in app.flashes('contact_success') %}
-                                        <div class="col-md-12 alert alert-success alert-dismissible fade show" role="alert">{{message}}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    {% endfor %}
-                                    {% for message in app.flashes('contact_error') %}
-                                        <div class="col-md-12 alert alert-danger alert-dismissible fade show" role="alert">{{message}}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    {% endfor %}
-                                    <div class="form-group col-md-6 mb-3">
-                                        {{ form_row(form.nom, {'attr': {'class': 'form-control rounded-3'}}) }}
-                                    </div>
-                                    <div class="form-group col-md-6 mb-3">
-                                        {{ form_row(form.email, {'attr': {'class': 'form-control rounded-3'}}) }}
-                                    </div>
-                                    <div class="form-group col-md-6 mb-3">
-                                        {{ form_row(form.telephone, {'attr': {'class': 'form-control rounded-3'}}) }}
-                                    </div>
-                                    <div class="form-group col-md-6 mb-3">
-                                        {{ form_row(form.sujet, {'attr': {'class': 'form-control rounded-3'}}) }}
-                                    </div>
-                                    <div class="form-group col-md-12 mb-3">
-                                        {{ form_row(form.message, {'attr': {'class': 'form-control rounded-3', 'rows': 4}}) }}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <button type="submit" class="btn btn-custom btn-block w-100 py-2">Envoyer Message</button>
-                                    </div>
-                                </div>
-                            {{ form_end(form)}}
+                            <div id="contact-form-container">
+                                {% include 'contact/_form.html.twig' %}
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -100,4 +72,37 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const formContainer = document.getElementById('contact-form-container');
+
+        formContainer.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const url = form.action;
+
+            const formData = new FormData(form);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remplacer le formulaire et afficher les messages flash
+                formContainer.innerHTML = data.form;
+
+                // (Optionnel) Tu peux aussi gérer ici des animations ou autres comportements JS
+            })
+            .catch(error => {
+                console.error('Erreur AJAX:', error);
+            });
+        });
+    });
+    </script>
 {% endblock %}

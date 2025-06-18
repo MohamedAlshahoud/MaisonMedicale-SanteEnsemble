@@ -1,0 +1,35 @@
+{% for message in app.flashes('contact_success') %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+{% for message in app.flashes('contact_error') %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+{{ form_start(form) }}
+    <div class="row">
+        <div class="form-group col-md-6 mb-3">
+            {{ form_row(form.nom, {'attr': {'class': 'form-control rounded-3'}}) }}
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            {{ form_row(form.email, {'attr': {'class': 'form-control rounded-3'}}) }}
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            {{ form_row(form.telephone, {'attr': {'class': 'form-control rounded-3'}}) }}
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            {{ form_row(form.sujet, {'attr': {'class': 'form-control rounded-3'}}) }}
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            {{ form_row(form.message, {'attr': {'class': 'form-control rounded-3', 'rows': 4}}) }}
+        </div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-custom btn-block w-100 py-2">Envoyer Message</button>
+        </div>
+    </div>
+{{ form_end(form) }}
