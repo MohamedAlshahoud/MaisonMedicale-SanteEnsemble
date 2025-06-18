@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
@@ -98,6 +99,40 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPassword(): ?string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->motDePasse = $password;
+        return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Clean up sensitive data if necessary
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_PATIENT';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
     public function getDateNaissance(): ?\DateTimeInterface
     {
         return $this->dateNaissance;
@@ -131,36 +166,6 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->motDePasse;
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->email;
-    }
-
-    public function eraseCredentials(): void
-    {
-        
-    }
-
-
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        $roles[] = 'ROLE_PATIENT';
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): static
-    {
-        $this->roles = $roles;
-        return $this;
-    }
-
-
     /**
      * @return Collection<int, RendezVous>
      */
@@ -182,7 +187,6 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeRendezVou(RendezVous $rendezVou): static
     {
         if ($this->rendezVous->removeElement($rendezVou)) {
-            // set the owning side to null (unless already changed)
             if ($rendezVou->getPatient() === $this) {
                 $rendezVou->setPatient(null);
             }
