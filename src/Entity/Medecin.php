@@ -6,9 +6,11 @@ use App\Repository\MedecinRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: MedecinRepository::class)]
-class Medecin
+class Medecin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,6 +25,15 @@ class Medecin
 
     #[ORM\Column(type: "boolean")]
     private bool $isGeneraliste;
+
+    #[ORM\Column(length: 180)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $motDePasse = null;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     /**
      * @var Collection<int, RendezVous>
@@ -78,6 +89,62 @@ class Medecin
     {
         $this->isGeneraliste = $isGeneraliste;
         return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getMotDePasse(): ?string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setMotDePasse(string $motDePasse): static
+    {
+        $this->motDePasse = $motDePasse;
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->motDePasse = $password;
+        return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_MEDECIN';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Nettoyage si nécessaire
     }
 
     /**
