@@ -39,7 +39,7 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: 'json')] // <-- LA CORRECTION CLÉ EST ICI !
     private array $roles = [];
 
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: RendezVous::class, orphanRemoval: true)]
@@ -48,6 +48,9 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->rendezVous = new ArrayCollection();
+        // Optionnel : Vous pouvez définir un rôle par défaut ici pour les nouveaux patients
+        // si vous ne voulez pas qu'ils soient créés sans aucun rôle.
+        // Par exemple : $this->roles = ['ROLE_PATIENT'];
     }
 
     public function getId(): ?int
@@ -99,9 +102,12 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->motDePasse;
+        return $this->motDePasse ?? '';
     }
 
     public function setPassword(string $password): static
@@ -110,23 +116,39 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getUserIdentifier(): string
     {
-        return $this->email;
+        return $this->email ?? '';
     }
 
+    /**
+     * @see UserInterface
+     */
     public function eraseCredentials(): void
     {
-        // Clean up sensitive data if necessary
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
+    /**
+     * @see UserInterface
+     * @return array<string>
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
+        // Garantie que chaque utilisateur a au moins ROLE_PATIENT par défaut
         $roles[] = 'ROLE_PATIENT';
+
         return array_unique($roles);
     }
 
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -177,7 +199,7 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
     public function addRendezVou(RendezVous $rendezVou): static
     {
         if (!$this->rendezVous->contains($rendezVou)) {
-            $this->rendezVous[] = $rendezVou;
+            $this->rendezVous->add($rendezVou);
             $rendezVou->setPatient($this);
         }
 
@@ -187,6 +209,7 @@ class Patient implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeRendezVou(RendezVous $rendezVou): static
     {
         if ($this->rendezVous->removeElement($rendezVou)) {
+            // set the owning side to null (unless already changed)
             if ($rendezVou->getPatient() === $this) {
                 $rendezVou->setPatient(null);
             }

@@ -10,18 +10,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+// Importez ChoiceField pour les rôles
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\HttpFoundation\Request;
+// La ligne suivante n'est pas utilisée et peut être supprimée si elle n'est pas nécessaire ailleurs.
+// use Symfony\Component\HttpFoundation\Request;
 
 class PatientCrudController extends AbstractCrudController
 {
@@ -40,9 +41,10 @@ class PatientCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions->add(Crud::PAGE_EDIT, Action::INDEX)
-                        ->add(Crud::PAGE_INDEX, Action::DETAIL)
-                        ->add(Crud::PAGE_EDIT, Action::DETAIL);
+        return $actions
+            ->add(Crud::PAGE_EDIT, Action::INDEX)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_EDIT, Action::DETAIL);
     }
 
     public function configureFields(string $pageName): iterable
@@ -64,7 +66,15 @@ class PatientCrudController extends AbstractCrudController
             DateTimeField::new('dateNaissance'),
             TextField::new('adresse'),
             TextField::new('telephone'),
-            //TextField::new('roles'),
+            // C'est la partie CORRIGÉE pour le champ 'roles'
+            ChoiceField::new('roles')
+                ->setChoices([
+                    'Utilisateur' => 'ROLE_USER',
+                    'Administrateur' => 'ROLE_ADMIN',
+                    // Ajoutez d'autres rôles ici si vous en avez, ex: 'Super Admin' => 'ROLE_SUPER_ADMIN'
+                ])
+                ->allowMultipleChoices() // Très important : permet la sélection multiple et enregistre comme un tableau
+                ->renderAsBadges(), // Optionnel : affiche les rôles sous forme de badges dans la liste
         ];
     }
 
@@ -86,7 +96,7 @@ class PatientCrudController extends AbstractCrudController
         return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, $this->hashPassword());
     }
 
-    // Modification de la méthode hashPassword() pour ne plus utiliser getPatient()
+    // Modification de la méthode hashPassword()
     public function hashPassword(){
         return function($event){
             $form = $event->getForm();
@@ -109,4 +119,3 @@ class PatientCrudController extends AbstractCrudController
         };
     }
 }
-
