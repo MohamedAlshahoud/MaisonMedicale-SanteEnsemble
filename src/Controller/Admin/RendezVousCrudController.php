@@ -75,4 +75,19 @@ class RendezVousCrudController extends AbstractCrudController
 
         parent::updateEntity($entityManager, $entityInstance);
     }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof RendezVous) return;
+
+        // On rend la disponibilité à nouveau libre
+        $dispo = $entityInstance->getDisponibilite();
+        if ($dispo) {
+            $dispo->setEstLibre(true);
+            $entityManager->persist($dispo);
+        }
+
+        parent::deleteEntity($entityManager, $entityInstance);
+    }
+
 }
