@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\RendezVousRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
@@ -22,8 +21,9 @@ class RendezVous
     #[ORM\JoinColumn(nullable: false)]
     private ?Patient $patient = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateHeure = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Disponibilite $disponibilite = null;
 
     public function getId(): ?int
     {
@@ -52,14 +52,14 @@ class RendezVous
         return $this;
     }
 
-    public function getDateHeure(): ?\DateTimeInterface
+    public function getDisponibilite(): ?Disponibilite
     {
-        return $this->dateHeure;
+        return $this->disponibilite;
     }
 
-    public function setDateHeure(\DateTimeInterface $dateHeure): static
+    public function setDisponibilite(?Disponibilite $disponibilite): static
     {
-        $this->dateHeure = $dateHeure;
+        $this->disponibilite = $disponibilite;
         return $this;
     }
 }

@@ -87,4 +87,15 @@ class Disponibilite
         $this->estLibre = $estLibre;
         return $this;
     }
+
+
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s → %s',
+            $this->debut->format('d/m/Y H:i'),
+            $this->fin->format('H:i')
+        );
+    }
+
 }
