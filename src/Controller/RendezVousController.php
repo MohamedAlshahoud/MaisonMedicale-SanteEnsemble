@@ -129,11 +129,12 @@ final class RendezVousController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $rendezVous = new RendezVous();
             $rendezVous->setMedecin($medecin);
-            $rendezVous->setDateHeure($disponibilite->getDebut());
+            $rendezVous->setDisponibilite($disponibilite);
             $rendezVous->setPatient($user);
 
-            // Supprime la disponibilité après réservation
-            $em->remove($disponibilite);
+            // ✅ Ne plus supprimer, juste la marquer comme utilisée
+            $disponibilite->setEstLibre(false);
+
             $em->persist($rendezVous);
             $em->flush();
 
@@ -167,7 +168,7 @@ final class RendezVousController extends AbstractController
             throw $this->createAccessDeniedException('Accès refusé.');
         }
 
-        $rendezvous = $em->getRepository(RendezVous::class)->findBy(['patient' => $user], ['dateHeure' => 'ASC']);
+        $rendezvous = $em->getRepository(RendezVous::class)->findBy(['patient' => $user], ['id' => 'ASC']);
 
         return $this->render('patient/rendezvous.html.twig', [
             'rendezvous' => $rendezvous,
@@ -183,14 +184,9 @@ final class RendezVousController extends AbstractController
             throw $this->createAccessDeniedException('Vous ne pouvez pas annuler ce rendez-vous.');
         }
 
-        // Recréer la disponibilité associée au rendez-vous
-        $disponibilite = new \App\Entity\Disponibilite();
-        $disponibilite->setMedecin($rendezVous->getMedecin());
-        $disponibilite->setDebut($rendezVous->getDateHeure());
-        $disponibilite->setFin((clone $rendezVous->getDateHeure())->modify('+30 minutes')); // ou la durée exacte
-        $disponibilite->setEstLibre(true);
+        // ✅ Libère la disponibilité sans la recréer
+        $rendezVous->getDisponibilite()->setEstLibre(true);
 
-        $em->persist($disponibilite);
         $em->remove($rendezVous);
         $em->flush();
 

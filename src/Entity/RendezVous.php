@@ -62,4 +62,10 @@ class RendezVous
         $this->disponibilite = $disponibilite;
         return $this;
     }
+
+    // ✅ Méthode utilitaire pour accéder à la date/heure du rendez-vous
+    public function getDateHeure(): ?\DateTimeInterface
+    {
+        return $this->disponibilite?->getDebut();
+    }
 }
